@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Configuration>
+    <Properties>
+        <Property name="pattern">%d{HH:mm:ss.SSS} [%thread] %-5level [%c][%M] - %msg%n</Property>
+    </Properties>
+    <Appenders>
+        <Console name="LogToConsole" target="SYSTEM_OUT">
+            <PatternLayout pattern="${pattern}"/>
+        </Console>
+        <RollingFile name="LogToRollingFile" fileName=".\\tactical.log"
+                     filePattern=".\\$${date:yyyy-MM}\app-%d{MM-dd-yyyy}-%i.log.gz">
+            <PatternLayout pattern="${pattern}"/>
+            <Policies>
+                <OnStartupTriggeringPolicy/>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size = "10 MB"/>
+            </Policies>
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+<!--        <Logger name="tr.com.billiards" level="debug" additivity="false">-->
+<!--            <AppenderRef ref="LogToRollingFile"></AppenderRef>-->
+<!--            <AppenderRef ref="LogToConsole" level = "error"></AppenderRef>-->
+<!--        </Logger>-->
+        <Root level="info" additivity = "false" >
+            <AppenderRef ref="LogToConsole"/>
+        </Root>
+    </Loggers>
+</Configuration>

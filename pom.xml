@@ -21,9 +21,15 @@
         <javafx.maven.plugin.version>0.0.5</javafx.maven.plugin.version>
         <maven.shade.plugin.version>3.0.0</maven.shade.plugin.version>
         <javafx.classifier>win</javafx.classifier>
+        <log4j.version>2.13.3</log4j.version>
 <!--        <javafx.classifier>linux</javafx.classifier>-->
     </properties>
     <dependencies>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>${log4j.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>

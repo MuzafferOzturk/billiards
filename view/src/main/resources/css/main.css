@@ -1,0 +1,18 @@
+.root {
+    -fx-background-color: rgb(33,33,33);
+}
+
+.app-bar {
+    -fx-background-color: rgb(51, 51, 51);
+    -fx-effect: dropshadow(three-pass-box, rgb(106, 106, 106), 10, 0, 0, 5);
+}
+
+.custom-image-view:pressed{
+    -fx-rotate: 30;
+}
+
+.label {
+    -fx-font-family: "Roboto Thin";
+    -fx-font-size: 60;
+    -fx-text-fill: crimson;
+}
