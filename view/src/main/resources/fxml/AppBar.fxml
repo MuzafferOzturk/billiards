@@ -7,7 +7,10 @@
       xmlns:fx="http://javafx.com/fxml"
       fx:id="appBarRoot" styleClass="app-bar"
       fx:controller="tr.com.billiards.view.widget.AppBarController">
-    <CustomImageView fx:id="homeIcon" pickOnBounds="true" imageName="home.png" fitHeight="100" fitWidth="100" AnchorPane.leftAnchor="0"/>
+    <CustomImageView fx:id="playIcon" pickOnBounds="true" imageName="play.png" fitHeight="100" fitWidth="100"
+                     AnchorPane.leftAnchor="0" onMouseClicked="#playIconClick"/>
+    <CustomImageView fx:id="homeIcon" pickOnBounds="true" imageName="home.png" fitHeight="100" fitWidth="100"
+                     AnchorPane.leftAnchor="0" onMouseClicked="#homeIconClick"/>
     <HBox alignment="CENTER" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" pickOnBounds="false">
         <VBox alignment="CENTER">
             <Label fx:id="gameTime" text="00:00" visible="false"/>
@@ -15,9 +18,13 @@
 
     </HBox>
     <HBox fx:id="actionBox" spacing="20" AnchorPane.rightAnchor="0" visible="false">
-        <CustomImageView fx:id="minusIcon" pickOnBounds="true" imageName="minus.png" fitHeight="100" fitWidth="100"/>
-        <CustomImageView fx:id="okIcon" pickOnBounds="true" imageName="ok.png" fitHeight="100" fitWidth="100"/>
-        <CustomImageView fx:id="plusIcon" pickOnBounds="true" imageName="plus.png" fitHeight="100" fitWidth="100"/>
+        <CustomImageView fx:id="minusIcon" pickOnBounds="true" imageName="minus.png"
+                         fitHeight="100" fitWidth="100" onMouseClicked="#minusIconClick"/>
+        <CustomImageView fx:id="okIcon" pickOnBounds="true" imageName="ok.png"
+                         fitHeight="100" fitWidth="100" onMouseClicked="#okIconClick"/>
+        <CustomImageView fx:id="plusIcon" pickOnBounds="true" imageName="plus.png"
+                         fitHeight="100" fitWidth="100" onMouseClicked="#plusIconClick"/>
     </HBox>
-    <CustomImageView fx:id="settingsIcon" pickOnBounds="true" imageName="settings.png" fitHeight="100" fitWidth="100" AnchorPane.rightAnchor="0"/>
+    <CustomImageView fx:id="settingsIcon" pickOnBounds="true" imageName="settings.png" fitHeight="100" fitWidth="100"
+                     AnchorPane.rightAnchor="0" onMouseClicked="#settingsClicked"/>
 </AnchorPane>

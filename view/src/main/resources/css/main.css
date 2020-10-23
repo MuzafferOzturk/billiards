@@ -11,6 +11,15 @@
     -fx-rotate: 30;
 }
 
+.button {
+    -fx-background-color: linear-gradient(#ff5400, crimson);
+    -fx-background-radius: 30;
+    -fx-background-insets: 0;
+    -fx-text-fill: white;
+    -fx-font-family: "Roboto Thin";
+    -fx-font-size: 50;
+}
+
 .label {
     -fx-font-family: "Roboto Thin";
     -fx-font-size: 60;

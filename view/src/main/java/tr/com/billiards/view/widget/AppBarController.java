@@ -5,11 +5,17 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.stage.Screen;
+import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import tr.com.billiards.view.core.helper.LoaderHelper;
+import tr.com.billiards.view.core.helper.MainHelper;
 import tr.com.billiards.view.core.api.BilliardsViewController;
 import tr.com.billiards.view.core.component.CustomImageView;
+import tr.com.billiards.view.core.enums.GameStatus;
 import tr.com.billiards.view.core.enums.HomeIconNames;
+import tr.com.billiards.view.core.enums.Scenes;
 import tr.com.billiards.view.model.AppBarProperties;
 
 import java.net.URL;
@@ -34,6 +40,8 @@ public class AppBarController implements BilliardsViewController {
     private CustomImageView okIcon;
     @FXML
     private CustomImageView plusIcon;
+    @FXML
+    private CustomImageView playIcon;
     //endregion
 
     @Override
@@ -46,11 +54,8 @@ public class AppBarController implements BilliardsViewController {
 
     private void bindVisibleProperties() {
         AppBarProperties properties = AppBarProperties.getInstance();
-        properties.homeIconVisiblePropertyProperty()
-                .addListener((observableValue, aBoolean, newValue)
-                        -> homeIcon.setImageName(Boolean.TRUE.equals(newValue)
-                        ? HomeIconNames.HOME.getIconName()
-                        : HomeIconNames.PLAY.getIconName()));
+        homeIcon.visibleProperty().bind(properties.homeIconVisiblePropertyProperty());
+        playIcon.visibleProperty().bind(homeIcon.visibleProperty().not());
         settingsIcon.visibleProperty().bind(properties.settingsIconVisiblePropertyProperty());
         gameTime.visibleProperty().bind(properties.gameTimeVisiblePropertyProperty());
         actionBox.visibleProperty().bind(properties.actionVisiblePropertyProperty());
@@ -60,5 +65,73 @@ public class AppBarController implements BilliardsViewController {
     public void prepareScene(Rectangle2D parentSize) {
         setComponentSize(parentSize);
         bindVisibleProperties();
+    }
+
+    private void initializeSettingsPane() {
+        BilliardsViewController controller = (BilliardsViewController) LoaderHelper.getInstance().loadScene(Scenes.SETTINGS);
+        controller.prepareScene(null);
+        MainHelper.getInstance().setSettingsScene(controller);
+    }
+
+    @FXML
+    private void settingsClicked() {
+        if (MainHelper.getInstance().getSettingsScene() == null)
+            initializeSettingsPane();
+        Stage stage = MainHelper.getInstance().getSettingsScene().getStage();
+        if (stage.isShowing())
+            stage.close();
+        else
+            stage.show();
+    }
+
+    @FXML
+    private void playIconClick() {
+        if (MainHelper.getInstance().getActiveScene() != null)
+            MainHelper.getInstance().getActiveScene().getStage().show();
+    }
+
+    @FXML
+    private void homeIconClick() {
+        if (AppBarProperties.getInstance().getGameStatusObjectProperty().equals(GameStatus.PLAYING_GAME))
+            AppBarProperties.getInstance().setGameStatusObjectProperty(GameStatus.PAUSE_GAME);
+        MainHelper.getInstance().fireActiveStageCloseRequest();
+    }
+
+    @FXML
+    private void plusIconClick() {
+        if (MainHelper.getInstance().getActiveScene() != null)
+            MainHelper.getInstance().getActiveScene().plusButtonEvent();
+    }
+
+    @FXML
+    private void minusIconClick() {
+        if (MainHelper.getInstance().getActiveScene() != null)
+            MainHelper.getInstance().getActiveScene().minusButtonEvent();
+    }
+
+    @FXML
+    private void okIconClick() {
+        if (MainHelper.getInstance().getActiveScene() != null)
+            MainHelper.getInstance().getActiveScene().okButtonEvent();
+    }
+
+    @Override
+    public Stage getStage() {
+        return (Stage) appBarRoot.getScene().getWindow();
+    }
+
+    @Override
+    public void plusButtonEvent() {
+        //Do nothing
+    }
+
+    @Override
+    public void minusButtonEvent() {
+        //Do nothing
+    }
+
+    @Override
+    public void okButtonEvent() {
+        //Do nothing
     }
 }

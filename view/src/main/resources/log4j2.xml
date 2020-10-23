@@ -7,15 +7,15 @@
         <Console name="LogToConsole" target="SYSTEM_OUT">
             <PatternLayout pattern="${pattern}"/>
         </Console>
-        <RollingFile name="LogToRollingFile" fileName=".\\tactical.log"
-                     filePattern=".\\$${date:yyyy-MM}\app-%d{MM-dd-yyyy}-%i.log.gz">
-            <PatternLayout pattern="${pattern}"/>
-            <Policies>
-                <OnStartupTriggeringPolicy/>
-                <TimeBasedTriggeringPolicy/>
-                <SizeBasedTriggeringPolicy size = "10 MB"/>
-            </Policies>
-        </RollingFile>
+<!--        <RollingFile name="LogToRollingFile" fileName=".\\billiards.log"-->
+<!--                     filePattern=".\\$${date:yyyy-MM}\app-%d{MM-dd-yyyy}-%i.log.gz">-->
+<!--            <PatternLayout pattern="${pattern}"/>-->
+<!--            <Policies>-->
+<!--                <OnStartupTriggeringPolicy/>-->
+<!--                <TimeBasedTriggeringPolicy/>-->
+<!--                <SizeBasedTriggeringPolicy size = "10 MB"/>-->
+<!--            </Policies>-->
+<!--        </RollingFile>-->
     </Appenders>
     <Loggers>
 <!--        <Logger name="tr.com.billiards" level="debug" additivity="false">-->

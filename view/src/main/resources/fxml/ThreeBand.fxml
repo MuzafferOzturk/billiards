@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.Label?>
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:id="threeBandRoot"
+            fx:controller="tr.com.billiards.view.ThreeBandController">
+    <Label text="TESTTT"/>
+</AnchorPane>

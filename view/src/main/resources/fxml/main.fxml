@@ -1,18 +1,28 @@
-<?import javafx.scene.layout.AnchorPane?>
-<?import java.net.URL?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.*?>
+<?import java.net.URL?>
 <AnchorPane fx:controller="tr.com.billiards.view.MainController"
-            xmlns:fx="http://javafx.com/fxml">
+            xmlns:fx="http://javafx.com/fxml" fx:id="mainRoot">
     <stylesheets>
         <URL value="@../css/main.css"/>
     </stylesheets>
-    <fx:include fx:id="appBar" source="AppBar.fxml" AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0"/>
-    <VBox spacing="50" AnchorPane.bottomAnchor="20">
-        <Button text="PLAY" onMouseClicked="#playGame"/>
-        <Button text="PAUSE" onMouseClicked="#pauseGame"/>
-        <Button text="NOGAME" onMouseClicked="#noGame"/>
+    <fx:include fx:id="appBar" source="AppBar.fxml" AnchorPane.topAnchor="0"
+                AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0"/>
+
+    <VBox fx:id="startGameVBox" spacing="50" AnchorPane.bottomAnchor="0" AnchorPane.topAnchor="0"
+          AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" alignment="CENTER" pickOnBounds="false">
+        <HBox alignment="CENTER">
+            <Button text="%3_band_mode_label" onMouseClicked="#threeBandClick"/>
+        </HBox>
+        <HBox alignment="CENTER">
+            <Button text="%survival_mode_label" onMouseClicked="#survivalClick"/>
+        </HBox>
     </VBox>
 
+    <VBox fx:id="stopGameVBox" visible="false" spacing="50" AnchorPane.bottomAnchor="0" AnchorPane.topAnchor="0"
+          AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" alignment="CENTER" pickOnBounds="false">
+        <HBox alignment="CENTER">
+            <Button text="%stop_paused_game_label" onMouseClicked="#stopGame"/>
+        </HBox>
+    </VBox>
 </AnchorPane>

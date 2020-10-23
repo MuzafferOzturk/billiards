@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import java.net.URL?>
+<FlowPane xmlns="http://javafx.com/javafx"
+          xmlns:fx="http://javafx.com/fxml"
+          fx:id="settingsRoot"
+          fx:controller="tr.com.billiards.view.SettingsController" hgap="100" vgap="10"
+          orientation="VERTICAL">
+    <padding>
+        <Insets left="20"/>
+    </padding>
+    <stylesheets>
+        <URL value="@/css/settings.css"/>
+    </stylesheets>
+    <fx:define>
+        <ToggleGroup fx:id="startingOrderGroup"/>
+        <ToggleGroup fx:id="startingBallGroup"/>
+    </fx:define>
+    <VBox>
+        <Label text="%game_time_label" styleClass="header-label"/>
+        <HBox alignment="CENTER" HBox.hgrow="ALWAYS" spacing="20">
+            <CheckBox fx:id="gameTimeUnlimited" text="∞"/>
+            <Label fx:id="gameTimeLabel" onMouseClicked="#setActiveNode"
+                   styleClass="value-label" disable="${gameTimeUnlimited.selected}"/>
+        </HBox>
+    </VBox>
+
+
+    <VBox>
+        <Label text="%gamer_round_time_label" styleClass="header-label"/>
+        <HBox alignment="CENTER" HBox.hgrow="ALWAYS" spacing="20">
+            <CheckBox fx:id="gamerRoundTimeUnlimited" text="∞"/>
+            <Label fx:id="gamerRoundTimeLabel" onMouseClicked="#setActiveNode"
+                   styleClass="value-label" disable="${gamerRoundTimeUnlimited.selected}"/>
+        </HBox>
+    </VBox>
+
+    <VBox>
+        <Label text="%game_point_label" styleClass="header-label"/>
+        <HBox alignment="CENTER" HBox.hgrow="ALWAYS" spacing="20">
+            <CheckBox fx:id="gamePointUnlimited" text="∞"/>
+            <Label fx:id="gamePointLabel" onMouseClicked="#setActiveNode"
+                   styleClass="value-label" disable="${gamePointUnlimited.selected}"/>
+        </HBox>
+    </VBox>
+
+    <VBox>
+        <Label text="%billiards_cue_count_label" styleClass="header-label"/>
+        <HBox alignment="CENTER" HBox.hgrow="ALWAYS" spacing="20">
+            <CheckBox fx:id="billiardsCueCountUnlimited" text="∞"/>
+            <Label fx:id="billiardsCueCountLabel" onMouseClicked="#setActiveNode"
+                   styleClass="value-label" disable="${billiardsCueCountUnlimited.selected}"/>
+        </HBox>
+    </VBox>
+
+    <VBox>
+        <Label text="%starting_order_label" styleClass="header-label"/>
+        <HBox alignment="CENTER" HBox.hgrow="ALWAYS" spacing="20">
+            <RadioButton text="%order_label" toggleGroup="${startingOrderGroup}" selected="true"/>
+            <RadioButton text="%random_label" toggleGroup="${startingOrderGroup}"/>
+        </HBox>
+    </VBox>
+
+    <VBox>
+        <Label text="%starting_ball_label" styleClass="header-label"/>
+        <HBox alignment="CENTER" HBox.hgrow="ALWAYS" spacing="20">
+            <RadioButton id="yellow-radio" text="%yellow_label" toggleGroup="${startingBallGroup}" selected="true"/>
+            <RadioButton id="white-radio" text="%white_label" toggleGroup="${startingBallGroup}"/>
+        </HBox>
+    </VBox>
+
+</FlowPane>

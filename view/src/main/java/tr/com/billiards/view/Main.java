@@ -8,7 +8,8 @@ import javafx.scene.Scene;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import tr.com.billiards.view.core.MainHelper;
+import tr.com.billiards.view.core.helper.MainHelper;
+import tr.com.billiards.view.core.helper.ResourceHelper;
 
 public class Main extends Application {
 
@@ -16,7 +17,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("/fxml/main.fxml"));
-        fxmlLoader.setResources(null);
+        fxmlLoader.setResources(ResourceHelper.getInstance().getResourceBundle());
         Parent root = fxmlLoader.load();
         primaryStage.setTitle("Billiards");
         Rectangle2D screenSize = Screen.getPrimary().getBounds();
