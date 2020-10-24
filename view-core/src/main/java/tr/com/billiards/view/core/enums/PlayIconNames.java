@@ -1,13 +1,13 @@
 package tr.com.billiards.view.core.enums;
 
-public enum HomeIconNames {
-    HOME("home.png"),
-    PLAY("play.png");
+public enum PlayIconNames {
+    PLAY("play_red.png"),
+    PAUSE("pause.png");
 
 
     private String iconName;
 
-    HomeIconNames(String iconName) {
+    PlayIconNames(String iconName) {
         this.iconName = iconName;
     }
 

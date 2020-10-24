@@ -11,11 +11,12 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 
 public class PlayerScoreBoard extends VBox {
-    private StringProperty playerNumber = new SimpleStringProperty("0");
-    private StringProperty billiardsCueCount = new SimpleStringProperty("0");
-    private StringProperty playerName = new SimpleStringProperty("Oyuncu");
-    private StringProperty playerPoint = new SimpleStringProperty("0");
-    private StringProperty average = new SimpleStringProperty("0.000");
+    private final StringProperty playerNumber = new SimpleStringProperty("0");
+    private final StringProperty billiardsCueCount = new SimpleStringProperty("1");
+    private final StringProperty playerName = new SimpleStringProperty("Oyuncu");
+    private final StringProperty playerPoint = new SimpleStringProperty("0");
+    private final StringProperty average = new SimpleStringProperty("0.000");
+    private final StringProperty borderBallImage = new SimpleStringProperty("/icons/yellow_ball.png");
 
     private HBox getNewHBox() {
         HBox hBox = new HBox();
@@ -62,8 +63,41 @@ public class PlayerScoreBoard extends VBox {
         return createLabel(average, "average-label");
     }
 
-    private void averageListener() {
+    public void selectScoreBoard() {
+        this.setStyle("-fx-background-color: rgba(220, 20, 60, 0.5);" +
+                "-fx-background-image: url('" + borderBallImage.get() +"');" +
+                "-fx-background-repeat: no-repeat no-repeat");
+    }
 
+    public void unSelectScoreBoard() {
+        this.setStyle("-fx-background-color: rgba(0,0,0,0);" +
+                "-fx-background-image: null");
+    }
+
+    private void addPlayerPoint(int addedNum) {
+        int point = Integer.parseInt(playerPoint.get()) + addedNum;
+        playerPoint.set(String.valueOf(point));
+    }
+
+    public void increasePlayerPoint() {
+        addPlayerPoint(1);
+    }
+
+    public void decreasePlayerPoint() {
+        addPlayerPoint(-1);
+    }
+
+    private void calcAverage(String playerPoint, String average) {
+        float point = Float.parseFloat(playerPoint);
+        float averageFloat = Float.parseFloat(average);
+        averageProperty().set(String.format("%.3f", (point / averageFloat)));
+    }
+
+    private void averageListener() {
+        playerPoint.addListener((observableValue, s, newPoint)
+                -> calcAverage(newPoint, billiardsCueCount.get()));
+//        billiardsCueCountProperty().addListener((observableValue, s, newCueCount)
+//                -> calcAverage(playerPoint.get(), newCueCount));
     }
 
     public PlayerScoreBoard() {
@@ -71,6 +105,7 @@ public class PlayerScoreBoard extends VBox {
         this.getChildren().add(createPlayerName());
         this.getChildren().add(createPlayerPoint());
         this.getChildren().add(createPlayerAverage());
+        averageListener();
     }
 
     public String getPlayerNumber() {
@@ -131,5 +166,17 @@ public class PlayerScoreBoard extends VBox {
 
     public void setAverage(String average) {
         this.average.set(average);
+    }
+
+    public String getBorderBallImage() {
+        return borderBallImage.get();
+    }
+
+    public StringProperty borderBallImageProperty() {
+        return borderBallImage;
+    }
+
+    public void setBorderBallImage(String borderBallImage) {
+        this.borderBallImage.set(borderBallImage);
     }
 }

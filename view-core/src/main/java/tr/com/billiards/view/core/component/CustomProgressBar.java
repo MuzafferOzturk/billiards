@@ -15,30 +15,32 @@ import javafx.scene.text.TextAlignment;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class CustomProgressBar extends HBox {
     private final ProgressBar progressBar = new ProgressBar();
     private final ProgressIndicator progressIndicator = new ProgressIndicator();
     private final IntegerProperty maxTimeProperty = new SimpleIntegerProperty(30);
-    private final ExecutorService service = Executors.newSingleThreadExecutor();
     private final ReadOnlyDoubleWrapper currentValue = new ReadOnlyDoubleWrapper(30);
     private Task currentValueDecreaseTask;
+    private ExecutorService service = Executors.newSingleThreadExecutor();
     private ProgressBarFinishEvent finishEvent;
+    private AtomicBoolean isRunning = new AtomicBoolean(false);
 
     private void initializeCurrentValueTask() {
         currentValueDecreaseTask = new Task() {
             @Override
             protected Object call() throws Exception {
                 while (true) {
-                    currentValue.setValue(currentValue.get() - 1);
-                    if (currentValue.get() <= 0) {
-                        if (finishEvent != null)
-                            finishEvent.apply();
-                        break;
+                    if (isRunning.get() && currentValue.get() > 0) {
+                        currentValue.setValue(currentValue.get() - 1);
+                        if (currentValue.get() <= 0) {
+                            if (finishEvent != null)
+                                finishEvent.apply();
+                        }
                     }
                     Thread.sleep(1000);
                 }
-                return null;
             }
         };
     }
@@ -77,6 +79,7 @@ public class CustomProgressBar extends HBox {
     }
 
     public CustomProgressBar() {
+        this.setStyle("-fx-background-color: rgb(51, 51, 51)");
         this.getStylesheets().add(getClass().getResource("/css/customProgressBar.css").toExternalForm());
         progressIndicator.setMinHeight(100);
         progressIndicator.setMaxHeight(100);
@@ -88,19 +91,20 @@ public class CustomProgressBar extends HBox {
                         -> progressBar.setMinWidth(numberNew.doubleValue() - 100));
         initializeCurrentValueTask();
         bindProgress();
+        service.execute(currentValueDecreaseTask);
     }
 
     public void startProgress() {
-        service.submit(currentValueDecreaseTask);
+        isRunning.set(true);
     }
 
     public void pauseProgress() {
-        service.shutdown();
+        isRunning.set(false);
     }
 
     public void restartProgress() {
-        this.currentValue.setValue(maxTimeProperty.getValue());
         pauseProgress();
+        this.currentValue.setValue(maxTimeProperty.getValue());
         startProgress();
     }
 
@@ -123,5 +127,9 @@ public class CustomProgressBar extends HBox {
 
     public void setFinishEvent(ProgressBarFinishEvent finishEvent) {
         this.finishEvent = finishEvent;
+    }
+
+    public boolean getIsRunning() {
+        return isRunning.get();
     }
 }

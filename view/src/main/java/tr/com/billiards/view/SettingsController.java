@@ -4,14 +4,15 @@ import javafx.fxml.FXML;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import tr.com.billiards.view.core.api.BilliardsViewController;
+import tr.com.billiards.view.core.enums.StartingBalls;
 import tr.com.billiards.view.core.enums.StartingOrder;
 import tr.com.billiards.view.core.helper.MainHelper;
 import tr.com.billiards.view.model.AppBarProperties;
@@ -43,7 +44,9 @@ public class SettingsController implements BilliardsViewController {
     @FXML
     private CheckBox gamePointUnlimited;
     @FXML
-    private ComboBox<StartingOrder> startingOrder;
+    private ToggleGroup startingOrderGroup;
+    @FXML
+    private ToggleGroup startingBallGroup;
     //endregion
 
     @Override
@@ -60,6 +63,10 @@ public class SettingsController implements BilliardsViewController {
         billiardsCueCountLabel.textProperty().bindBidirectional(SettingsProperties.getInstance().billiardsCueCountProperty());
         gamePointLabel.setText(SettingsProperties.getInstance().getGamePoint());
         gamePointLabel.textProperty().bindBidirectional(SettingsProperties.getInstance().gamePointProperty());
+        startingBallGroup.selectedToggleProperty().addListener((observableValue, toggle, newToggle)
+                -> SettingsProperties.getInstance().startingBallsProperty().set(StartingBalls.valueOf(newToggle.getUserData().toString())));
+        startingOrderGroup.selectedToggleProperty().addListener((observableValue, toggle, newToggle)
+                -> SettingsProperties.getInstance().startingOrderProperty().set(StartingOrder.valueOf(newToggle.getUserData().toString())));
     }
 
     private void showActionIcons(boolean isShown) {
@@ -69,20 +76,12 @@ public class SettingsController implements BilliardsViewController {
 
     private void setRequests() {
         getStage().setOnCloseRequest(windowEvent -> {
-//            if (preActiveScene != null)
-//                MainHelper.getInstance().setActiveScene(preActiveScene);
-//            else
-//                MainHelper.getInstance().setActiveScene(null);
-//            preActiveScene = null;
             if (MainHelper.getInstance().getActiveScene() == this)
                 MainHelper.getInstance().setActiveScene(null);
             showActionIcons(false);
         });
 
         getStage().setOnShown(windowEvent -> {
-//            if (MainHelper.getInstance().getActiveScene() != null)
-//                preActiveScene = MainHelper.getInstance().getActiveScene();
-//            MainHelper.getInstance().setActiveScene(this);
             if (MainHelper.getInstance().getActiveScene() == null)
                 MainHelper.getInstance().setActiveScene(this);
             showActionIcons(true);

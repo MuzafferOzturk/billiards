@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.*?>
+<?import tr.com.billiards.view.core.component.CustomImageView?>
 <?import tr.com.billiards.view.core.component.CustomProgressBar?>
 <?import tr.com.billiards.view.widget.PlayerScoreBoard?>
 <?import java.net.URL?>
@@ -13,6 +15,19 @@
     </stylesheets>
     <PlayerScoreBoard fx:id="firstPlayerScoreBoard" AnchorPane.leftAnchor="10" AnchorPane.topAnchor="10"
                       AnchorPane.bottomAnchor="0" playerNumber="1" playerName="Efren Reyes"/>
+
+    <VBox fx:id="statusBox" pickOnBounds="false" AnchorPane.rightAnchor="0" AnchorPane.leftAnchor="0" spacing="50">
+        <HBox alignment="CENTER">
+            <CustomImageView fx:id="playPauseImage" fitWidth="100" fitHeight="100" pickOnBounds="true"
+                             imageName="play_red.png" onMouseClicked="#playPauseClick"/>
+        </HBox>
+        <HBox alignment="CENTER">
+            <VBox alignment="CENTER">
+                <CustomImageView imageName="billiards_cue.png" fitHeight="100" fitWidth="100"/>
+                <Label fx:id="billiardsCueCountLabel" text="1" styleClass="point-label"/>
+            </VBox>
+        </HBox>
+    </VBox>
 
     <PlayerScoreBoard fx:id="secondPlayerScoreBoard" AnchorPane.rightAnchor="10" AnchorPane.topAnchor="10"
                       AnchorPane.bottomAnchor="0" playerNumber="1" playerName="Shane Van Boening"/>
