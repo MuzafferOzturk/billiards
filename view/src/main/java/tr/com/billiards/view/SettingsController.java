@@ -54,6 +54,22 @@ public class SettingsController implements BilliardsViewController {
         setRequests();
     }
 
+    private void unlimitedSet(Label label) {
+        label.disabledProperty().addListener((observableValue, aBoolean, newValue) -> {
+            if (newValue) {
+                label.setText("0");
+                MainHelper.getInstance().setActiveNode(null);
+            }
+        });
+    }
+
+    private void bindUnlimitedData() {
+        unlimitedSet(gameTimeLabel);
+        unlimitedSet(gamerRoundTimeLabel);
+        unlimitedSet(gamePointLabel);
+        unlimitedSet(billiardsCueCountLabel);
+    }
+
     private void bindData() {
         gameTimeLabel.setText(SettingsProperties.getInstance().getGameTime());
         gameTimeLabel.textProperty().bindBidirectional(SettingsProperties.getInstance().gameTimeProperty());
@@ -67,6 +83,7 @@ public class SettingsController implements BilliardsViewController {
                 -> SettingsProperties.getInstance().startingBallsProperty().set(StartingBalls.valueOf(newToggle.getUserData().toString())));
         startingOrderGroup.selectedToggleProperty().addListener((observableValue, toggle, newToggle)
                 -> SettingsProperties.getInstance().startingOrderProperty().set(StartingOrder.valueOf(newToggle.getUserData().toString())));
+        bindUnlimitedData();
     }
 
     private void showActionIcons(boolean isShown) {

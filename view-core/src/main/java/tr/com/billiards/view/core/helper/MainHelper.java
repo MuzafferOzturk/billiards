@@ -43,7 +43,8 @@ public class MainHelper {
     }
 
     private void activeNodeStyleDraw() {
-        activeNode.setStyle("-fx-border-color: crimson; -fx-border-width: 5; -fx-border-radius: 5");
+        if (activeNode != null)
+            activeNode.setStyle("-fx-border-color: crimson; -fx-border-width: 5; -fx-border-radius: 5");
     }
 
     public void setActiveNode(Node activeNode) {

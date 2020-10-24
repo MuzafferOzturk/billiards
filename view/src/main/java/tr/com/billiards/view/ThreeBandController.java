@@ -45,7 +45,11 @@ public class ThreeBandController implements BilliardsViewController {
     //endregion
 
     private void setRequests() {
-        getStage().setOnCloseRequest(windowEvent -> AppBarProperties.getInstance().setGameStatusObjectProperty(GameStatus.PAUSE_GAME));
+        getStage().setOnCloseRequest(windowEvent -> {
+            AppBarProperties.getInstance().setGameStatusObjectProperty(GameStatus.PAUSE_GAME);
+            AppBarProperties.getInstance().pauseGameTime();
+            pauseGame();
+        });
 
         getStage().setOnShown(windowEvent -> {
             AppBarProperties.getInstance().setGameStatusObjectProperty(GameStatus.PLAYING_GAME);
@@ -57,8 +61,6 @@ public class ThreeBandController implements BilliardsViewController {
         double perWidth = screenSize.getWidth() * 0.33;
         firstPlayerScoreBoard.setPrefWidth(perWidth);
         secondPlayerScoreBoard.setPrefWidth(perWidth);
-//        firstPlayerScoreBoard.setPrefHeight(screenSize.getHeight() - 100);
-//        secondPlayerScoreBoard.setPrefHeight(screenSize.getHeight() - 100);
         statusBox.setPrefWidth(perWidth);
     }
 
@@ -119,15 +121,19 @@ public class ThreeBandController implements BilliardsViewController {
     private void playGame() {
         playPauseImage.setImageName(PlayIconNames.PAUSE.getIconName());
         progressBox.startProgress();
+        AppBarProperties.getInstance().startGameTime();
     }
 
     private void pauseGame() {
         playPauseImage.setImageName(PlayIconNames.PLAY.getIconName());
         progressBox.pauseProgress();
+        AppBarProperties.getInstance().pauseGameTime();
     }
 
     @FXML
     private void playPauseClick() {
+        if (!AppBarProperties.getInstance().getGameTimeText().contains(":"))
+            return;
         if (playPauseImage.getImageName().equalsIgnoreCase(PlayIconNames.PAUSE.getIconName()))
             pauseGame();
         else

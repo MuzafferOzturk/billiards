@@ -9,13 +9,14 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import tr.com.billiards.view.core.helper.LoaderHelper;
-import tr.com.billiards.view.core.helper.MainHelper;
 import tr.com.billiards.view.core.api.BilliardsViewController;
 import tr.com.billiards.view.core.component.CustomImageView;
 import tr.com.billiards.view.core.enums.GameStatus;
 import tr.com.billiards.view.core.enums.Scenes;
+import tr.com.billiards.view.core.helper.LoaderHelper;
+import tr.com.billiards.view.core.helper.MainHelper;
 import tr.com.billiards.view.model.AppBarProperties;
+import tr.com.billiards.view.model.SettingsProperties;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -97,27 +98,44 @@ public class AppBarController implements BilliardsViewController {
             MainHelper.getInstance().getActiveScene().getStage().show();
     }
 
+    private void finishTheGame() {
+        MainHelper.getInstance().getActiveScene().getStage().close();
+        MainHelper.getInstance().setActiveScene(null);
+        AppBarProperties.getInstance().setGameStatusObjectProperty(GameStatus.NO_GAME);
+        AppBarProperties.getInstance().setGameTimeText(SettingsProperties.getInstance().getGameTime() + ":00");
+    }
+
     @FXML
     private void homeIconClick() {
-        if (AppBarProperties.getInstance().getGameStatusObjectProperty().equals(GameStatus.PLAYING_GAME))
-            AppBarProperties.getInstance().setGameStatusObjectProperty(GameStatus.PAUSE_GAME);
+        if (AppBarProperties.getInstance().getGameStatusObjectProperty().equals(GameStatus.PLAYING_GAME)) {
+            if (!AppBarProperties.getInstance().gameTimeTextProperty().get().contains(":"))
+                finishTheGame();
+            else
+                AppBarProperties.getInstance().setGameStatusObjectProperty(GameStatus.PAUSE_GAME);
+        }
         MainHelper.getInstance().fireActiveStageCloseRequest();
     }
 
     @FXML
     private void plusIconClick() {
+        if (!AppBarProperties.getInstance().getGameTimeText().contains(":"))
+            return;
         if (MainHelper.getInstance().getActiveScene() != null)
             MainHelper.getInstance().getActiveScene().plusButtonEvent();
     }
 
     @FXML
     private void minusIconClick() {
+        if (!AppBarProperties.getInstance().getGameTimeText().contains(":"))
+            return;
         if (MainHelper.getInstance().getActiveScene() != null)
             MainHelper.getInstance().getActiveScene().minusButtonEvent();
     }
 
     @FXML
     private void okIconClick() {
+        if (!AppBarProperties.getInstance().getGameTimeText().contains(":"))
+            return;
         if (MainHelper.getInstance().getActiveScene() != null)
             MainHelper.getInstance().getActiveScene().okButtonEvent();
     }
