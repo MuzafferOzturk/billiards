@@ -14,7 +14,6 @@ import tr.com.billiards.view.core.helper.MainHelper;
 import tr.com.billiards.view.core.api.BilliardsViewController;
 import tr.com.billiards.view.core.component.CustomImageView;
 import tr.com.billiards.view.core.enums.GameStatus;
-import tr.com.billiards.view.core.enums.HomeIconNames;
 import tr.com.billiards.view.core.enums.Scenes;
 import tr.com.billiards.view.model.AppBarProperties;
 
@@ -61,14 +60,22 @@ public class AppBarController implements BilliardsViewController {
         actionBox.visibleProperty().bind(properties.actionVisiblePropertyProperty());
     }
 
+    private void bindData() {
+        gameTime.textProperty().bindBidirectional(AppBarProperties.getInstance().gameTimeTextProperty());
+    }
+
     @Override
     public void prepareScene(Rectangle2D parentSize) {
         setComponentSize(parentSize);
         bindVisibleProperties();
+        bindData();
     }
 
+
     private void initializeSettingsPane() {
-        BilliardsViewController controller = (BilliardsViewController) LoaderHelper.getInstance().loadScene(Scenes.SETTINGS);
+        Rectangle2D screenSize = Screen.getPrimary().getBounds();
+        BilliardsViewController controller = (BilliardsViewController) LoaderHelper.getInstance()
+                .loadScene(Scenes.SETTINGS, screenSize.getWidth(), screenSize.getHeight() - 100);
         controller.prepareScene(null);
         MainHelper.getInstance().setSettingsScene(controller);
     }

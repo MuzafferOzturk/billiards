@@ -1,0 +1,29 @@
+.progress-bar {
+    -fx-accent: crimson;
+}
+.progress-bar > .track {
+    -fx-text-box-border: rgb(51, 51, 51);
+    -fx-control-inner-background: rgb(51, 51, 51);
+}
+
+.progress-indicator {
+    -fx-accent: crimson;
+}
+
+.progress-indicator .percentage {
+    -fx-fill: white;
+    -fx-font-family: "Roboto Thin";
+    -fx-font-size: 30;
+    -fx-text-fill: white;
+}
+
+.progress-indicator > .track {
+    -fx-text-box-border: white;
+    -fx-control-inner-background: white;
+}
+
+.label {
+    -fx-font-family: "Roboto Thin";
+    -fx-font-size: 50;
+    -fx-text-fill: white;
+}

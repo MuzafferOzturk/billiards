@@ -2,8 +2,10 @@ package tr.com.billiards.view;
 
 import javafx.fxml.FXML;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -65,8 +67,10 @@ public class MainController implements BilliardsViewController {
             logger.info("PAUSE GAME!!!");
         if (MainHelper.getInstance().getActiveScene() != null)
             MainHelper.getInstance().getActiveScene().getStage().close();
-        BilliardsViewController controller = (BilliardsViewController) LoaderHelper.getInstance().loadScene(scenes);
-        controller.prepareScene(null);
+        Rectangle2D screenSize = Screen.getPrimary().getBounds();
+        BilliardsViewController controller = (BilliardsViewController) LoaderHelper.getInstance()
+                .loadScene(scenes, screenSize.getWidth(), screenSize.getHeight() - 100);
+        controller.prepareScene(new Rectangle2D(0, 0, screenSize.getWidth(), screenSize.getHeight() - 100));
         controller.getStage().show();
     }
 

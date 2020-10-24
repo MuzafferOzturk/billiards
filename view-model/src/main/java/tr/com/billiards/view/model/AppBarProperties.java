@@ -1,18 +1,16 @@
 package tr.com.billiards.view.model;
 
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.*;
 import tr.com.billiards.view.core.enums.GameStatus;
 
 public class AppBarProperties {
     private static AppBarProperties instance;
-    ObjectProperty<GameStatus> gameStatusObjectProperty = new SimpleObjectProperty<>(GameStatus.NO_GAME);
-    BooleanProperty homeIconVisibleProperty = new SimpleBooleanProperty(true);
-    BooleanProperty settingsIconVisibleProperty = new SimpleBooleanProperty(true);
-    BooleanProperty gameTimeVisibleProperty = new SimpleBooleanProperty(false);
-    BooleanProperty actionVisibleProperty = new SimpleBooleanProperty(false);
+    private ObjectProperty<GameStatus> gameStatusObjectProperty = new SimpleObjectProperty<>(GameStatus.NO_GAME);
+    private BooleanProperty homeIconVisibleProperty = new SimpleBooleanProperty(true);
+    private BooleanProperty settingsIconVisibleProperty = new SimpleBooleanProperty(true);
+    private BooleanProperty gameTimeVisibleProperty = new SimpleBooleanProperty(false);
+    private BooleanProperty actionVisibleProperty = new SimpleBooleanProperty(false);
+    private StringProperty gameTimeText = new SimpleStringProperty("");
 
     private void prepareGameStatus() {
         gameStatusObjectProperty
@@ -93,5 +91,17 @@ public class AppBarProperties {
 
     public void setActionVisibleProperty(boolean actionVisibleProperty) {
         this.actionVisibleProperty.set(actionVisibleProperty);
+    }
+
+    public String getGameTimeText() {
+        return gameTimeText.get();
+    }
+
+    public StringProperty gameTimeTextProperty() {
+        return gameTimeText;
+    }
+
+    public void setGameTimeText(String gameTimeText) {
+        this.gameTimeText.set(gameTimeText);
     }
 }

@@ -1,6 +1,5 @@
 package tr.com.billiards.view.core.helper;
 
-import javafx.application.Platform;
 import javafx.scene.Node;
 import javafx.stage.Window;
 import javafx.stage.WindowEvent;

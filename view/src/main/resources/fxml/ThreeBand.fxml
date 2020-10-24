@@ -1,10 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.*?>
+<?import tr.com.billiards.view.core.component.CustomProgressBar?>
+<?import tr.com.billiards.view.widget.PlayerScoreBoard?>
+<?import java.net.URL?>
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:id="threeBandRoot"
             fx:controller="tr.com.billiards.view.ThreeBandController">
-    <Label text="TESTTT"/>
+    <stylesheets>
+        <URL value="@/css/three_band.css"/>
+    </stylesheets>
+    <PlayerScoreBoard fx:id="firstPlayerScoreBoard" AnchorPane.leftAnchor="10" AnchorPane.topAnchor="10"
+                      AnchorPane.bottomAnchor="0" playerNumber="1" playerName="Efren Reyes"/>
+
+    <PlayerScoreBoard fx:id="secondPlayerScoreBoard" AnchorPane.rightAnchor="10" AnchorPane.topAnchor="10"
+                      AnchorPane.bottomAnchor="0" playerNumber="1" playerName="Shane Van Boening"/>
+
+    <CustomProgressBar fx:id="progressBox" prefHeight="100" AnchorPane.bottomAnchor="0"
+                       AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0"/>
 </AnchorPane>

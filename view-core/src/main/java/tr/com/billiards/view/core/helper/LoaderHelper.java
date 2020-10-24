@@ -37,12 +37,11 @@ public class LoaderHelper {
         return stage;
     }
 
-    public Initializable loadScene(Scenes scenes) {
+    public Initializable loadScene(Scenes scenes, double width, double height) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource(scenes.getPath()));
             fxmlLoader.setResources(ResourceHelper.getInstance().getResourceBundle());
-            Rectangle2D screenSize = Screen.getPrimary().getBounds();
-            Scene scene = new Scene(fxmlLoader.load(), screenSize.getWidth(), screenSize.getHeight() - 100);
+            Scene scene = new Scene(fxmlLoader.load(), width, height);
             scene.setFill(Color.TRANSPARENT);
             Stage stage = getNewStage();
             stage.setScene(scene);
