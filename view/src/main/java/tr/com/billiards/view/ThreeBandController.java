@@ -10,7 +10,7 @@ import tr.com.billiards.view.core.api.BilliardsViewController;
 import tr.com.billiards.view.core.component.CustomImageView;
 import tr.com.billiards.view.core.component.CustomProgressBar;
 import tr.com.billiards.view.core.enums.GameStatus;
-import tr.com.billiards.view.core.enums.PlayIconNames;
+import tr.com.billiards.view.core.enums.PlayIconNamesThreeBoards;
 import tr.com.billiards.view.core.enums.StartingBalls;
 import tr.com.billiards.view.core.enums.StartingOrder;
 import tr.com.billiards.view.core.helper.MainHelper;
@@ -23,7 +23,6 @@ import java.util.Random;
 import java.util.ResourceBundle;
 
 public class ThreeBandController implements BilliardsViewController {
-    private int maxNumRound = 2;
     private int currentRound = 0;
     private PlayerScoreBoard activeBoard;
     private final Random random = new Random();
@@ -114,18 +113,19 @@ public class ThreeBandController implements BilliardsViewController {
         else
             selectBoard(firstPlayerScoreBoard, secondPlayerScoreBoard);
         currentRound++;
+        int maxNumRound = 2;
         if (currentRound >= maxNumRound)
             borderBilliardsCueIncrease();
     }
 
     private void playGame() {
-        playPauseImage.setImageName(PlayIconNames.PAUSE.getIconName());
+        playPauseImage.setImageName(PlayIconNamesThreeBoards.PAUSE.getIconName());
         progressBox.startProgress();
         AppBarProperties.getInstance().startGameTime();
     }
 
     private void pauseGame() {
-        playPauseImage.setImageName(PlayIconNames.PLAY.getIconName());
+        playPauseImage.setImageName(PlayIconNamesThreeBoards.PLAY.getIconName());
         progressBox.pauseProgress();
         AppBarProperties.getInstance().pauseGameTime();
     }
@@ -134,7 +134,7 @@ public class ThreeBandController implements BilliardsViewController {
     private void playPauseClick() {
         if (!AppBarProperties.getInstance().getGameTimeText().contains(":"))
             return;
-        if (playPauseImage.getImageName().equalsIgnoreCase(PlayIconNames.PAUSE.getIconName()))
+        if (playPauseImage.getImageName().equalsIgnoreCase(PlayIconNamesThreeBoards.PAUSE.getIconName()))
             pauseGame();
         else
             playGame();

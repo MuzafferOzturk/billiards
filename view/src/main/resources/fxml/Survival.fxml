@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import tr.com.billiards.view.core.component.CustomImageView?>
+<?import tr.com.billiards.view.core.component.CustomProgressBar?>
+<?import tr.com.billiards.view.widget.PlayerScoreBoard?>
+<?import java.net.URL?>
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:id="survivalRoot"
+            fx:controller="tr.com.billiards.view.SurvivalController">
+    <stylesheets>
+        <URL value="@/css/survival.css"/>
+    </stylesheets>
+
+    <HBox>
+        <PlayerScoreBoard fx:id="firstPlayerScoreBoard" playerNumber="1" playerName="SEMİH SAYGINER" averageVisible="false"/>
+
+        <PlayerScoreBoard fx:id="secondPlayerScoreBoard" playerNumber="2" playerName="MURAT NACİ" averageVisible="false"/>
+
+        <PlayerScoreBoard fx:id="thirdPlayerScoreBoard" playerNumber="3" playerName="ADNAN YÜKSEL" averageVisible="false"/>
+
+        <PlayerScoreBoard fx:id="fourthPlayerScoreBoard" playerNumber="4" playerName="LÜTFİ ÇENET" averageVisible="false"/>
+    </HBox>
+
+    <VBox alignment="CENTER" AnchorPane.bottomAnchor="100" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
+        <HBox alignment="CENTER">
+            <CustomImageView fx:id="playPauseImage" imageName="play.png" fitWidth="100" fitHeight="100" pickOnBounds="true"
+                             onMouseClicked="#playPauseClick"/>
+        </HBox>
+    </VBox>
+    <CustomProgressBar fx:id="progressBox" prefHeight="100" AnchorPane.bottomAnchor="0"
+                       AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0"/>
+
+</AnchorPane>

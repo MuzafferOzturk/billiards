@@ -1,0 +1,28 @@
+.root {
+    -fx-background-color: rgb(33, 33, 33);
+}
+
+.header-label {
+    -fx-font-family: "Roboto Thin";
+    -fx-font-size: 40;
+    -fx-text-fill: white;
+}
+
+.name-label {
+    -fx-font-family: "Roboto Thin";
+    -fx-font-size: 70;
+    -fx-text-fill: white;
+}
+
+.point-label {
+    -fx-font-family: "Roboto Thin";
+    -fx-font-size: 100;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+
+.average-label {
+    -fx-font-family: "Roboto Thin";
+    -fx-font-size: 40;
+    -fx-text-fill: white;
+}

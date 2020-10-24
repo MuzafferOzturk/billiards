@@ -30,7 +30,7 @@
     </VBox>
 
     <PlayerScoreBoard fx:id="secondPlayerScoreBoard" AnchorPane.rightAnchor="10" AnchorPane.topAnchor="10"
-                      AnchorPane.bottomAnchor="0" playerNumber="1" playerName="Shane Van Boening"/>
+                      AnchorPane.bottomAnchor="0" playerNumber="2" playerName="Shane Van Boening"/>
 
     <CustomProgressBar fx:id="progressBox" prefHeight="100" AnchorPane.bottomAnchor="0"
                        AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0"/>

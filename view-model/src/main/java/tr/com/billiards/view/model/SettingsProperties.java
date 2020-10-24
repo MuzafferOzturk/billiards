@@ -6,13 +6,13 @@ import tr.com.billiards.view.core.enums.StartingOrder;
 
 public class SettingsProperties {
     private static SettingsProperties instance;
-    private StringProperty gameTime = new SimpleStringProperty("10");
-    private StringProperty gamerRoundTime = new SimpleStringProperty("30");
-    private StringProperty billiardsCueCount = new SimpleStringProperty("100");
-    private StringProperty gamePoint = new SimpleStringProperty("30");
-    private ObjectProperty<StartingOrder> startingOrder = new SimpleObjectProperty<>(StartingOrder.ORDER);
-    private ObjectProperty<StartingBalls> startingBalls = new SimpleObjectProperty<>(StartingBalls.YELLOW);
-    private BooleanProperty tieUp = new SimpleBooleanProperty(false);
+    private final StringProperty gameTime = new SimpleStringProperty("10");
+    private final StringProperty gamerRoundTime = new SimpleStringProperty("30");
+    private final StringProperty billiardsCueCount = new SimpleStringProperty("100");
+    private final StringProperty gamePoint = new SimpleStringProperty("30");
+    private final ObjectProperty<StartingOrder> startingOrder = new SimpleObjectProperty<>(StartingOrder.ORDER);
+    private final ObjectProperty<StartingBalls> startingBalls = new SimpleObjectProperty<>(StartingBalls.YELLOW);
+    private final BooleanProperty tieUp = new SimpleBooleanProperty(false);
 
     private SettingsProperties() {
     }

@@ -1,5 +1,7 @@
 package tr.com.billiards.view.widget;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.geometry.Pos;
@@ -17,6 +19,7 @@ public class PlayerScoreBoard extends VBox {
     private final StringProperty playerPoint = new SimpleStringProperty("0");
     private final StringProperty average = new SimpleStringProperty("0.000");
     private final StringProperty borderBallImage = new SimpleStringProperty("/icons/yellow_ball.png");
+    private final BooleanProperty averageVisible= new SimpleBooleanProperty(true);
 
     private HBox getNewHBox() {
         HBox hBox = new HBox();
@@ -104,7 +107,11 @@ public class PlayerScoreBoard extends VBox {
         this.setSpacing(20);
         this.getChildren().add(createPlayerName());
         this.getChildren().add(createPlayerPoint());
-        this.getChildren().add(createPlayerAverage());
+        HBox averageBox = createPlayerAverage();
+        averageVisibleProperty()
+                .addListener((observableValue, aBoolean, newValue)
+                        -> averageBox.setVisible(newValue));
+        this.getChildren().add(averageBox);
         averageListener();
     }
 
@@ -178,5 +185,17 @@ public class PlayerScoreBoard extends VBox {
 
     public void setBorderBallImage(String borderBallImage) {
         this.borderBallImage.set(borderBallImage);
+    }
+
+    public boolean isAverageVisible() {
+        return averageVisible.get();
+    }
+
+    public BooleanProperty averageVisibleProperty() {
+        return averageVisible;
+    }
+
+    public void setAverageVisible(boolean averageVisible) {
+        this.averageVisible.set(averageVisible);
     }
 }
